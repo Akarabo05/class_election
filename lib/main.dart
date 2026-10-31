@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const ElectionApp());
 }
-
 class Candidate {
   Candidate(this.name);
   final String name;
   int votes = 0;
 }
-
 String cleanName(String raw) {
   final words = raw.trim().split(' ').where((w) => w.isNotEmpty);
   final fixed = words.map(
